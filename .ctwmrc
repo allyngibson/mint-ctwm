@@ -1,1 +1,755 @@
+#---------------------------------------------------------
+# CTWMRC - STRANGE NEW WORLDS++++
+#          Version 1.1-Mint Y - February 5, 2024
+#          by Allyn Gibson
+#
+# Based on .ctwmrc-files by:
+# * Morgan Eklof
+# * Anders Skargren
+# * Tomas Cedven
+# * Peter C
+# * Dan Lilliehorn
+# * Steve Litt
+#
+# Legend:
+# I=Icon(s)
+# TB=TitleBar(s)
+# IM=IconManager
+# WS=WorkSpace
+# WSM=WorkSpaceManager 
+#---------------------------------------------------------
 
+#---------------------------------------------------------
+# EMERGENCY
+# This line is here so that U will be able 2 restart CTWM
+# even if the rest of the file doesn't work very well!
+#---------------------------------------------------------
+
+"F9" = s : r|w|t|m|f : f.quit  #shift "L2": source .ctwmrc
+
+#---------------------------------------------------------      
+# FONTS                                                 
+#---------------------------------------------------------
+
+TitleFont               "-adobe-helvetica-bold-r-normal--*-120-*-*-*-*-*-*"
+ResizeFont              "-adobe-helvetica-bold-r-normal--*-120-*-*-*-*-*-*"
+MenuFont                "-adobe-helvetica-bold-r-normal--*-120-*-*-*-*-*-*"
+WorkspaceFont           "-adobe-helvetica-medium-r-*-*-12-*-*-*-*-*-*-*"
+IconFont                "-adobe-helvetica-bold-r-normal--*-100-*-*-*-*-*-*"
+IconManagerFont         "-adobe-helvetica-medium-r-normal--*-140-*-*-*-*-*-*"
+
+#---------------------------------------------------------
+# PIXMAP CONFIG and
+# PIXMAPS
+#---------------------------------------------------------
+
+PixmapDirectory         "~/.local/share/ctwm/pixmap"      # dir. for xpms
+
+Pixmaps {
+     TitleHighlight      "dimple3"
+}
+
+#---------------------------------------------------------
+# COLOR CONFIG and
+# COLORS                                          
+#---------------------------------------------------------
+
+Color
+{
+  BorderColor           "#116D77"
+  DefaultBackground     "#404040"
+  DefaultForeground     "rgb:e/e/e"
+  TitleBackground       "#2B2B2B"
+  TitleForeground       "white" 
+  BorderTileBackground  "#072E33"
+  BorderTileForeground  "black"
+  MenuBackground        "#2F2F2F"
+  MenuForeground        "white"
+  MenuTitleBackground   "#35A854"
+  MenuTitleForeground   "white"
+  MenuShadowColor       "gray15"     # default is black
+  IconBackground        "#404040"
+  IconForeground        "#F9F9F9"
+  IconBorderColor       "#35A854"
+  IconManagerBackground "#2C2C2C"
+  IconManagerForeground "#F9F9F9"
+  IconManagerHighlight  "yellow"
+  MapWindowBackground   "AntiqueWhite"  # BG color for WSMwins
+  MapWindowForeground   "gray4"      # FG color for WSMwins
+}
+
+SaveColor                            # tell client about these
+{                                    # settings to "smooth"
+     BorderColor
+     TitleBackground
+     TitleForeground
+}
+
+#---------------------------------------------------------
+# MONOCHROME "COLOR"-SETTINGS
+#---------------------------------------------------------
+
+Monochrome
+{
+      BorderColor                    "black"
+      BorderTileForeground           "black"
+      BorderTileBackground           "white"
+      TitleForeground                "black"
+      TitleBackground                "white"
+      MenuTitleForeground            "black"
+      MenuTitleBackground            "white"
+      MapWindowForeground            "white"
+      MapWindowBackground            "white"
+}
+
+#---------------------------------------------------------
+# GENERAL CTWM CONFIG                                         
+#---------------------------------------------------------
+
+ClickToFocus                         # Prevent mouse movement changing focus -- Steve Litt
+
+RestartPreviousState                 # use previous if any
+
+DecorateTransients                   # give transients TB
+TransientHasOccupation               # ..uhh? Try it! What is it?
+TransientOnTop                       # Put transients top when they appear 
+AutoFocusToTransients                # Give transients autofocus.
+
+OpaqueMove                           # want to see the window?
+    {                                # optional app list
+    }
+
+NoGrabServer                         # no grab server on popup/opaque (?)
+
+RaiseOnClick                         # raise window when clicked on
+RaiseOnClickButton      1            # which button?
+
+DontMoveOff                          # Add below & U get resistance
+MoveOffResistance       150          # how hard must I push?
+
+ConstrainedMoveTime     0            # How quick to 2click to constrain
+
+#IgnoreLockModifier                   # Don't check locks for bindings (CAPS)
+IgnoreModifier {
+  lock                               # Ignore Caps Lock (Note: doesn't seem to work)
+  m2                                 # Ignore Num Lock
+}
+
+RandomPlacement         "on"         # ask for pos?
+MoveDelta               3            # dist. 4 move 2 work
+AnimationSpeed          15           # update speed for animated things
+ClearShadowContrast     50           # clear shadow for 3D
+DarkShadowContrast      50           # dark shadow for 3D
+MovePackResistance      100          # how many pix. res. be4 overlap?
+UsePPosition            "on"         # let the apps have their way?
+#RaiseDelay             10           # how long delay raise? - Steve Litt
+
+RaiseWhenAutoUnSqueeze                  
+ShortAllWindowsMenus                 # Don't show IM and WSM in win.menu
+
+BorderRight             117          # define "panel" area
+MaxWindowSize           "2428x1401"  # constrain window size 2560x1440
+# MaxWindowSize         "1796x1047"  # constrain window size 1920x1080   
+
+#---------------------------------------------------------
+# TITLEBAR CONFIG and
+# TITLEBAR BUTTONS                                          
+#---------------------------------------------------------
+
+UseThreeDTitles
+NoDefaults                           # not use default buttons
+
+SunkFocusWindowTitle                 # sink instead of raise?
+
+TitleJustification      "center"      # right/left/center
+
+LeftTitleButton   ":xpm:bar"                = f.menu "windowctrl" # Window menu button
+RightTitleButton  "xpm:box.xpm"             = f.fullzoom     # Maximize button
+RightTitleButton  ":xpm:cross"              = f.delete
+
+#---------------------------------------------------------
+# BORDER CONFIG
+#---------------------------------------------------------
+
+UseThreeDBorders
+
+ThreeDBorderWidth       6            # Had been 4
+
+MWMIgnore {
+    "DECOR_BORDER"                   # en/disable window borders
+    "DECOR_TITLE"                    # en/disable titlebars
+}
+
+#---------------------------------------------------------
+# WORKSPACE MANAGER CONFIG and
+# WORKSPACE COLORS AND NAMES                              
+# N = "Name"  |  MC = "ManagerColor"  |  MTC = "ManTextColor" 
+# BC = "BackgroundColor"  |  FC = "ForegroundColor"  |  RX = "RootXpm" 
+#---------------------------------------------------------
+
+ShowWorkSpaceManager		         # start with workspace manager up
+ReallyMoveInWorkspaceManager         # Move windows from WSM?
+UseThreeDWMap
+DontWarpCursorInWMap                 # no move to indicated win
+NoShowOccupyAll                      # do not display windows open on all workspaces in Workspace Manager
+ReverseCurrentWorkspace              # reverse colors in curr WS?
+StartInMapState                      # buttons or maps?
+DontToggleWorkSpaceManagerState      # stay in map state
+NoImagesInWorkSpaceManager           # don't use wallpaper in WorkSpace Manager
+
+WMgrHorizButtonIndent    0           # /dist. between buttons
+WMgrVertButtonIndent     0           # \when in button mode
+
+# WorkSpaceManagerGeometry      "120x544-0-120" 1      # 1920x1080
+WorkSpaceManagerGeometry        "120x630-0-120" 1      # 2560x1440
+
+WorkSpaces 
+{
+#    N          MC        MTC       BC       FC    RX 
+    "1"    {"rgb:0/2/2" "rgb:f/f/f" "rgb:0/2/2" "rgb:f/f/f" "jpeg:backgrounds/background1.jpg"}
+    "2"    {"rgb:0/0/2" "rgb:f/f/f" "rgb:0/0/2" "rgb:f/f/f" "jpeg:backgrounds/background2.jpg"}
+    "3"    {"rgb:2/0/0" "rgb:f/f/f" "rgb:2/0/0" "rgb:f/f/f" "jpeg:backgrounds/background3.jpg"}
+    "4"    {"rgb:2/2/2" "rgb:f/f/f" "rgb:2/2/2" "rgb:f/f/f" "jpeg:backgrounds/background4.jpg"}
+    "5"    {"rgb:0/6/6" "rgb:f/f/f" "rgb:0/6/6" "rgb:f/f/f" "jpeg:backgrounds/background5.jpg"}
+    "6"    {"rgb:4/4/6" "rgb:f/f/f" "rgb:4/4/6" "rgb:f/f/f" "jpeg:backgrounds/background6.jpg"}
+    "7"    {"rgb:6/4/4" "rgb:f/f/f" "rgb:6/4/4" "rgb:f/f/f" "jpeg:backgrounds/background7.jpg"}
+    "8"    {"rgb:6/6/6" "rgb:f/f/f" "rgb:6/6/6" "rgb:f/f/f" "jpeg:backgrounds/background8.jpg"}
+    "9"    {"rgb:0/4/4" "rgb:f/f/f" "rgb:0/4/4" "rgb:f/f/f" "jpeg:backgrounds/background9.jpg"}
+    "10"   {"rgb:2/2/4" "rgb:f/f/f" "rgb:2/2/4" "rgb:f/f/f" "jpeg:backgrounds/background10.jpg"}
+#   "11"   {"rgb:4/2/2" "rgb:f/f/f" "rgb:4/2/2" "rgb:f/f/f" "jpeg:backgrounds/background11.jpg"}
+#   "12"   {"rgb:4/4/4" "rgb:f/f/f" "rgb:4/4/4" "rgb:f/f/f" "jpeg:backgrounds/background12.jpg"}
+}
+
+MapWindowCurrentWorkSpace { "#0A5244" "#A2E7F4" "#f2f2f2" }
+
+#---------------------------------------------------------
+# ICON CONFIG and
+# ICONS
+#---------------------------------------------------------
+
+ForceIcons                           # use icons put below, not default
+IconifyByUnmapping                   # no icon when iconified
+#NoRaiseOnDeiconify                  # raise deiconified wins?
+#AutoRaiseIcons                      # raise icons when under cursor
+
+IconJustification        "center"     # where put image/title?
+MaxIconTitleWidth        120
+IconBorderWidth          0           # frame around I?
+
+SchrinkIconTitles                    # shrink icon titles a'la Motif
+
+# Where on the screen to put icons and how to place them.
+# IconRegion                "1800x105+0+0"   North West 128 100  { }
+# IconRegion                "1800x105+0+110" North West 128 100  { }
+# IconRegionAlignement      "bottom"
+# IconRegionJustification    "center"
+
+#---------------------------------------------------------
+# ICON MANAGER CONFIG
+#---------------------------------------------------------
+
+# ShowIconManager                    # activate/deactivate IM
+UseThreeDIconManagers
+SortIconManager                      # sorts alphabetically
+IconManagerShadowDepth   2
+NoIconManagerFocus                   # !focus the win under cursor in IM
+
+# Icon Manager Geometry:  Size:       Columns:
+IconManagerGeometry		  "120x300-0+120" 1
+
+#---------------------------------------------------------
+# MOUSE POINTER CONFIG and   (cursor = mouse pointer)
+# MOUSE POINTERS
+#---------------------------------------------------------
+
+Cursors
+{
+    Destroy   "pirate"
+}
+
+
+
+#---------------------------------------------------------
+# MENU CONFIG and
+# MENUS                                           
+#
+# Tip for menus:
+# Instead of rewriting your menus for every platform you
+# move your .ctwmrc-file to, you could keep all menus in
+# the same file and simply add a couple of lines to the
+# mouse button funcion specifications below. Here I have
+# one set of menus for DEC and one for Linux. Study my
+# example! :)
+#---------------------------------------------------------
+
+StayUpMenus                          # pin automatically?
+# WarpToDefaultMenuEntry             # warp to menu (when using above)
+
+UseThreeDMenus                       # 3D or not?
+MenuShadowDepth          1           # how big shadow? (1 looks good)
+NoBackingStore                       # /which is faster,
+
+# Workspace Menu (Left click in root)
+menu "root"
+{
+    "LMDE 7"                            f.title
+    "Terminal"                          !"xterm &"
+    ""                                  f.separator
+    "File Manager"                      !"nemo &"
+    "Vivaldi Browser"                   !"vivaldi-stable --password-store=gnome-libsecret --window-size=1600,960 &"
+    "Music on Console"                  !"wmctrl -s 7; terminator -l music &"
+#   "Music on Console"                  !"wmctrl -s 5; xterm -e 'mocp -T /usr/share/moc/themes/darkdot_theme' &"
+    ""                                  f.separator
+    "Utilities"                         f.menu "stgs" 
+    "Applications"                      f.menu "miscapps"
+}
+
+# Workspace submenu: Settings
+menu "stgs" 
+{
+    "Utilities"                         f.title
+    "Cinnamon Settings"                 !"cinnamon-settings &"
+    "BTOP++"                            !"xterm -e btop &"
+    "Environment"                       !"mintEnvironment &"
+    "Sun Clock"                         !"sunclock -map -mapgeom 900x474 &"
+    "GLXgears"                          !"glxgears &"
+    "XFontSel"                          !"xfontsel -geometry -136+6 &"
+    "XOSView"                           !"xosview -geometry -136-46 &"
+}
+
+# Workspace submenu: Miscellaneous apps
+menu "miscapps" 
+{
+    "Applications"                     f.title
+    "Games"                            f.menu "games"
+    "Office"                            f.menu "office"
+    ""                                 f.separator
+    "Calculator"                       !"xcalc -geometry 340x600+980+86 &"
+    "Disks"                            !"gnome-disks &"
+    "Nano"                             !"xterm -e nano &"
+    "Text Editor"                      !"xed &"
+    "TTY-Clock"                        !"xterm -e tty-clock -c -C 2 -r -f '%A, %B %d' -s &"
+    ""                                 f.separator
+    "Asunder"                          !"asunder &"
+    "Audacious"                        !"audacious &"
+    "Rhythmbox"                        !"rhythmbox &"
+    ""                                 f.separator
+    "frogr"                            !"frogr &"
+    "GIMP"                             !"gimp-3.0 &"
+    ""                                 f.separator
+    "Alpine"                           !"wmctrl -s 4; gnome-terminal -e alpine &"
+    "Filezilla"                        !"filezilla &"
+    "nchat"                            !"gnome-terminal -e nchat &"
+    "Vivaldi"                          !"vivaldi-stable --password-store=gnome-libsecret --window-size=1600,960 &"
+    ""                                 f.separator
+    "Astroterm"                        !"wmctrl -s 8; terminator -l astroterm &"
+#   "Astroterm"                        !"wmctrl -s 7; xterm -T 'astroterm' -e 'astroterm --latitude=30.91 --longitude=-76.64 --metadata --color' &"
+    "Calibre"                          !"calibre &"
+    "Virtual Manager"                  !"virt-manager &"
+}
+
+# Workspace submenu: Games apps
+menu "games" 
+{
+    "Games"                          f.title
+    "AisleRiot"                      !"sol &"
+    "FreeCell"                       !"sol --freecell &"
+    "Reversi"                        !"iagno --classic --size=12 &"
+    "Sudoku"                         !"gnome-sudoku &"
+    "Super Star Trek"                !"xterm -e superstartrek &"
+    "Tetris"                         !"xterm -e tetris &"
+    "Xbomb"                          !"xbomb -hexagon &"
+    "XGammon"                        !"xgammon &"
+    "XNetHack"                       !"xnethack &"
+}
+
+# Workspace submenu: Office apps
+menu "office" 
+{
+    "Office"                          f.title
+    "LibreOffice"                     !"libreoffice &"
+    "LibreOffice Base"                !"libreoffice --base &"
+    "LibreOffice Calc"                !"libreoffice --calc &"
+    "LibreOffice Draw"                !"libreoffice --draw &"
+    "LibreOffice Impress"             !"libreoffice --impress &"
+    "LibreOffice Math"                !"libreoffice --math &"
+    "LibreOffice Writer"              !"libreoffice --writer &"
+}
+
+# System menu (Right click in root)
+menu "defops" {
+    "System"                           f.title
+    "Resize"                           f.resize
+    "Move"                             f.move
+    "Kill"                             f.destroy
+    "Close"                            f.delete
+    ""                                 f.separator
+    "Screenshot"                       !"scrot '/home/allyn/Pictures/Screenshots/Screenshot_%Y%m%d_%H%M%S.png' &"
+    ""                                 f.separator
+    "Sleep"                            f.menu "asksleep"
+    "Lock Screen"                      !"xscreensaver-command -lock &"
+    "Restart CTWM"                     f.restart
+    "Exit"                             f.menu "askexit"
+}
+
+# System submenu: Confirm sleep mode
+menu "asksleep" 
+{
+    "Sleep?"                           f.title
+    "No"                               f.nop
+    "Yes"                              !"systemctl suspend"
+}
+
+# System submenu: Confirm exit
+menu "askexit" 
+{
+    "Exit?"                            f.title
+    "No"                               f.nop
+    "Yes"                              f.quit
+}
+
+# Window menu (Dropdown in window title bar)
+menu "windowctrl"
+{
+    "Minimize"                         f.iconify
+    "Maximize"                         f.fullzoom
+    "Move"                             f.move
+    "Resize"                           f.resize
+    "Tile"                             f.menu "tile"
+    "Info"                             f.identify
+    ""                                 f.separator
+    "Bring to Top"                     f.raise
+    "Always on Visible Workspace"      f.occupyall
+    "Move to Workspace Up"             f.movetoprevworkspace
+    "Move to Workspace Down"           f.movetonextworkspace
+    "Move to Another Workspace"        f.menu "workspacemove"
+    ""                                 f.separator
+    "Screenshot"                       !"scrot -b -u '/home/allyn/Pictures/Screenshots/Screenshot_%Y%m%d_%H%M%S.png' &"
+    "Resize 1080x1080"                 !"wmctrl -r :ACTIVE: -e 0,-1,-1,1072,1047 &"
+    ""                                 f.separator
+    "Close"                            f.delete
+}
+
+# Window submenu: Workspace controls
+menu "workspacemove" {
+    "Move to Workspace 1"              !"wmctrl -r :ACTIVE: -t 0"
+    "Move to Workspace 2"              !"wmctrl -r :ACTIVE: -t 1"
+    "Move to Workspace 3"              !"wmctrl -r :ACTIVE: -t 2"
+    "Move to Workspace 4"              !"wmctrl -r :ACTIVE: -t 3"
+    "Move to Workspace 5"              !"wmctrl -r :ACTIVE: -t 4"
+    "Move to Workspace 6"              !"wmctrl -r :ACTIVE: -t 5"
+    "Move to Workspace 7"              !"wmctrl -r :ACTIVE: -t 6"
+    "Move to Workspace 8"              !"wmctrl -r :ACTIVE: -t 7"
+    "Move to Workspace 9"              !"wmctrl -r :ACTIVE: -t 8"
+    "Move to Workspace 10"             !"wmctrl -r :ACTIVE: -t 9"
+}
+
+# Workspace submenu: Titling controls
+menu "tile"
+{
+    "Tile Windows"                     f.title
+# This block is for windows with gaps on a 1920x1080
+#    "Top Left"                         !"wmctrl -r :ACTIVE: -e 0,8,8,880,495"        # 1920x1080
+#    "Top Right"                        !"wmctrl -r :ACTIVE: -e 0,904,8,880,495"      # 1920x1080
+#    "Bottom Left"                      !"wmctrl -r :ACTIVE: -e 0,8,544,850,495"      # 1920x1080
+#    "Bottom Right"                     !"wmctrl -r :ACTIVE: -e 0,904,544,880,495"    # 1920x1080
+#    "Left Half"                        !"wmctrl -r :ACTIVE: -e 0,8,8,880,1031"       # 1920x1080
+#    "Right Half"                       !"wmctrl -r :ACTIVE: -e 0,904,8,880,1031"     # 1920x1080
+#    "Top Half"                         !"wmctrl -r :ACTIVE: -e 0,8,8,1776,495"       # 1920x1080
+#    "Bottom Half"                      !"wmctrl -r :ACTIVE: -e 0,8,544,1776,495"     # 1920x1080
+#    "Fullscreen"                       !"wmctrl -r :ACTIVE: -e 0,8,8,1776,1031"      # 1920x1080
+
+# This block is for windows with gaps on a 2560x1440
+#    "Top Left"                         !"wmctrl -r :ACTIVE: -e 0,8,8,1196,671"       # 2560x1440
+#    "Top Right"                        !"wmctrl -r :ACTIVE: -e 0,1224,8,1196,671"    # 2560x1440
+#    "Bottom Left"                      !"wmctrl -r :ACTIVE: -e 0,8,724,1196,671"     # 2560x1440
+#    "Bottom Right"                     !"wmctrl -r :ACTIVE: -e 0,1224,724,1196,671"  # 2560x1440
+#    "Left Half"                        !"wmctrl -r :ACTIVE: -e 0,8,8,1200,1391"      # 2560x1440
+#    "Right Half"                       !"wmctrl -r :ACTIVE: -e 0,1224,8,1200,1391"   # 2560x1440
+#    "Top Half"                         !"wmctrl -r :ACTIVE: -e 0,8,8,2416,675"       # 2560x1440
+#    "Bottom Half"                      !"wmctrl -r :ACTIVE: -e 0,8,724,2416,675"     # 2560x1440
+#    "Fullscreen"                       !"wmctrl -r :ACTIVE: -e 0,8,8,2416,1391"      # 2560x1440
+
+# This block is for windows without gaps on a 1920x1080
+#    "Top Left"                         !"wmctrl -r :ACTIVE: -e 0,0,0,892,507"        # 1920x1080
+#    "Top Right"                        !"wmctrl -r :ACTIVE: -e 0,900,0,892,507"      # 1920x1080
+#    "Bottom Left"                      !"wmctrl -r :ACTIVE: -e 0,0,540,892,507"      # 1920x1080
+#    "Bottom Right"                     !"wmctrl -r :ACTIVE: -e 0,900,540,892,507"    # 1920x1080
+#    "Left Half"                        !"wmctrl -r :ACTIVE: -e 0,0,0,892,1047"       # 1920x1080
+#    "Right Half"                       !"wmctrl -r :ACTIVE: -e 0,900,0,892,1047"     # 1920x1080
+#    "Top Half"                         !"wmctrl -r :ACTIVE: -e 0,0,0,1792,543"       # 1920x1080
+#    "Bottom Half"                      !"wmctrl -r :ACTIVE: -e 0,0,540,1792,507"     # 1920x1080
+#    "Fullscreen"                       !"wmctrl -r :ACTIVE: -e 0,0,0,1792,1047"      # 1920x1080
+
+# This block is for windows without gaps on a 2560x1440
+    "Top Left"                         !"wmctrl -r :ACTIVE: -e 0,0,0,1208,683"       # 2560x1440
+    "Top Right"                        !"wmctrl -r :ACTIVE: -e 0,1220,0,1208,683"    # 2560x1440
+    "Bottom Left"                      !"wmctrl -r :ACTIVE: -e 0,0,720,1208,683"     # 2560x1440
+    "Bottom Right"                     !"wmctrl -r :ACTIVE: -e 0,1220,720,1208,683"  # 2560x1440
+    "Left Half"                        !"wmctrl -r :ACTIVE: -e 0,0,0,1208,1403"      # 2560x1440
+    "Right Half"                       !"wmctrl -r :ACTIVE: -e 0,1220,0,1208,1403"   # 2560x1440
+    "Top Half"                         !"wmctrl -r :ACTIVE: -e 0,0,0,2428,683"       # 1920x1080
+    "Bottom Half"                      !"wmctrl -r :ACTIVE: -e 0,0,720,2428,683"     # 1920x1080
+    "Fullscreen"                       !"wmctrl -r :ACTIVE: -e 0,0,0,2428,1403"      # 1920x1080
+}
+
+#---------------------------------------------------------
+# WM DISPLAY CONFIGURATION                              
+#---------------------------------------------------------
+
+IconManagerDontShow {
+    "WorkSpaceManager"
+    "xclock"
+    "xeyes"
+    "xsysinfo"
+    "xlogo"
+    "xload"
+    "conky"
+    "clockmaker"
+} 
+
+NoHighLight
+{                                    # optional winlist. no list = no hl
+    "TWM Icon Manager"
+    "WorkSpaceManager"
+    "xclock"
+    "xlogo"
+    "xeyes"
+    "Occupy Window"
+    "xload"
+}    
+
+OccupyAll 
+{
+    "xclock"
+    "xload"
+    "xlogo"
+    "xeyes"
+    "xosview"
+    "xsysinfo"
+    "conky"
+}
+
+AlwaysOnTop
+{
+    "TWM Icon Manager"
+    "WorkSpaceManager"
+    "xload"
+    "xclock"
+    "xeyes"
+}
+
+NoTitle                              # do not place a title bar on these windows
+{                                    # optional app list              
+    "TWM Icon Manager"
+    "WorkSpaceManager"
+    "xclock"
+    "xlogo"
+    "xeyes"
+    "audacious"
+    "xload"
+    "conky"
+}
+
+OnTopPriority 8 
+{
+    "TWM Icon Manager"
+    "WorkSpaceManager"
+    "xeyes"
+    "xclock"
+    "xload"
+}
+
+OnTopPriority 7
+{
+    "xlogo"
+}
+
+OnTopPriority Icons 8 
+{
+    "WorkSpaceManager" 
+}
+
+StartIconified 
+{
+}
+
+WindowRing                           # which windows to use when warping
+{ 
+}
+
+NoBorder
+{
+    "TWM Icon Manager"
+    "WorkSpaceManager"
+    "xclock"
+    "xlogo"
+    "xeyes"
+    "audacious"
+    "xload"
+    "conky"
+}
+
+Occupy                               # Use this to launch applications on 
+{                                    # specific workspaces
+   "gimp*"                           {"3"}
+   "teams.microsoft*"                {"3"}
+   "vivaldi-stable"                  {"4"}
+   "thunderbird-default"             {"5"}
+   "soffice*"                         {"6"}
+   "xfreerdp"                        {"7"}
+}
+
+WindowRingExclude                    # Do not cycle through these windows 
+{ 
+    "xclock" 
+    "xeyes"
+    "xlogo"
+    "xload"
+    "conky"
+}
+
+WindowGeometries
+{
+    "gnome-terminal"    "826x558+1050+300"
+#   "FreeRDP*"          "1440x960+176+41"   #1920x1080
+    "FreeRDP*"          "2016x1344+208+31"  #2560x1440
+    "iagno*"            "912x964+818+218"
+    "nemo*"             "800x550+963+98"
+    "sol*"              "1024x768"
+    "teams.microsoft*"  "1600x960+416-223"
+    "terminator*"       "2428x1401+0+0"
+#   "vivaldi*"          "1600x960+96-43"    # 1920x1080
+    "vivaldi*"          "2000x1200+274-102" # 2560x1440
+    "xcalc*"            "340x600+96+149"
+    "xclock"            "120x120-2-0"
+    "xed*"              "812x716+240+400"
+#   "xeyes*"            "120x80+1799-746"   # 1920x1080
+    "xeyes*"            "120x80-0+528"      # 2560x1440
+#   "xload*"            "120x80+1799-666"   # 1920x1080
+    "xload*"            "120x80-0-750"      # 2560x1440
+    "xviewer*"          "1036x780+195+95"
+    "xterm*"            "804x484+494+281"
+}
+
+#---------------------------------------------------------
+# FUNCTION DEFINITIONS                                   
+#---------------------------------------------------------
+
+Function "focus-raise"         { f.raise f.focus } # Steve Litt; see also f.raise-n-focus
+Function "move-or-raiselower"  { f.move f.deltastop f.raiselower }
+Function "move-or-lower"       { f.move f.deltastop f.lower }
+Function "move-or-raise"       { f.move f.deltastop f.raise }
+Function "raise-and-resize"    { f.raise f.deltastop f.resize }
+Function "move-or-iconify"     { f.move f.deltastop f.iconify }
+Function "move-or-flip"         { f.move f.deltastop f.raiselower }
+Function "raise-n-focus"       { f.raise f.focus }
+Function "raise-move"          { f.raise f.deltastop f.forcemove }
+Function "move-or-raise"       { f.move f.deltastop f.raise }
+Function "blob"                { f.deiconify f.raise f.focus f.lower }
+
+#---------------------------------------------------------
+# MOUSE BUTTON FUNCTIONS
+# BUTTONS      : CONTEXT      : FUNCTION            
+#---------------------------------------------------------
+
+Button1 =      : root         : f.menu "root"
+Button2 =      : root         : f.menu "tile"
+Button3 =      : root         : f.menu "defops"
+
+#Button1 = s   : root         : f.menu "Tangentbord"
+#Button2 = s   : root         : f.menu "Exec"
+
+Button1 = mod4 : root         : f.menu "shutdown"
+
+Button1 =      : t            : f.function "raise-move"
+Button2 =      : t|f          : f.raiselower
+Button3 =      : t|f          : f.menu "Start"
+
+Button1 =      : f            : f.function "raise-and-resize"
+
+Button1 = s    : t|f          : f.zoom
+Button2 = s    : t|f          : f.forcemove
+Button3 = s    : t|f          : f.fullzoom
+
+Button1 = m    : t|f|i|m      : f.raiselower
+Button2 = m    : t|f|i        : f.move
+Button3 = m    : t|f|i|m      : f.lower
+
+Button1 =      : i|m          : f.iconify
+Button2 =      : i            : f.move
+Button3 =      : i|m          : f.raiselower
+
+Button1 = m    : window       : f.raiselower
+#Button2 = s|m : window       : f.forcemove
+Button3 = m    : window       : f.resize
+
+#---------------------------------------------------------
+# KEY FUNCTIONS
+# KEYS      = Altkey: CONTEXT      : FUNCTION
+#---------------------------------------------------------
+
+# Launchers
+"e"      = mod4              : all :     !"nemo &"           # Launch file manager
+"t"      = m | c             : all :     !"xterm &"          # Launch terminal
+"Return" = mod4              : all :     !"xterm &"          # Launch terminal
+
+# Screenshots
+"Print"  =           : all : !"scrot '/home/allyn/Pictures/Screenshots/Screenshot_%Y%m%d_%H%M%S.png' &"
+"Print"  = m         : all : !"scrot -b -u '/home/allyn/Pictures/Screenshots/Screenshot_%Y%m%d_%H%M%S.png' &"
+
+# System Stuff
+"d"      = mod4              : all :     f.menu "root"     # Root Menu
+"d"      = mod4 | s          : all :     f.menu "defops"   # System Menu
+"q"      = mod4 | s          : window :  f.delete          # Close Window
+"F4"     = mod4 | s          : window :  f.delete          # Close Window
+"e"      = mod4 | s          : all :     f.menu "logout"   # Logout
+"r"      = mod4 | s          : all :     f.restart
+"c"      = mod4 | s          : all :     f.restart
+
+"Delete" = m | c             : all : f.quit                # Traditional ctrl-alt-delete
+"Escape" = m | c             : all : f.restart             # Restart session ctrl-alt-esc
+"End"    = m | c             : all : !"systemctl poweroff &"         # Power off system
+"l"      = mod4              : all : !"xscreensaver-command -lock &" # Lock screen
+
+# Window Management
+# "Up"   = mod4      : window : f.changesize "top +10"
+# "Down" = mod4      : window : f.changesize "bottom +10"
+# "Right"= mod4      : window : f.changesize "right +10"
+# "Left" = mod4      : window : f.changesize "left +10"
+"Up"     = mod4 | c  : window : f.topzoom
+"Down"   = mod4 | c  : window : f.bottomzoom
+"Right"  = mod4 | c  : window : f.rightzoom
+"Left"   = mod4 | c  : window : f.leftzoom
+"Tab"    = m         : all    : f.warpring "next"
+# "F4"   = m         : window : f.iconify
+"F7"     = m         : window : f.move
+"F8"     = m         : window : f.resize
+"F10"    = m         : window : f.fullzoom
+
+# Workspace Management
+"Left"    = m | c        : all : f.upworkspace            # move to left workspace
+"Right"   = m | c        : all : f.downworkspace          # move to right workspace
+"Left"    = m | c | shift : window : f.movetoprevworkspace      # move window to left workspace
+"Right"   = m | c | shift : window : f.movetonextworkspace      # move window to right workspace
+"1"       = mod4           : all   : f.gotoworkspace "1"
+"2"       = mod4           : all   : f.gotoworkspace "2"
+"3"       = mod4           : all   : f.gotoworkspace "3"
+"4"       = mod4           : all   : f.gotoworkspace "4"
+"5"       = mod4           : all   : f.gotoworkspace "5"
+"6"       = mod4           : all   : f.gotoworkspace "6"
+"7"       = mod4           : all   : f.gotoworkspace "7"
+"8"       = mod4           : all   : f.gotoworkspace "8"
+"9"       = mod4           : all   : f.gotoworkspace "9"
+"0"       = mod4           : all   : f.gotoworkspace "10"
+
+"1"       = mod 4 | shift : window : !"wmctrl -r :ACTIVE: -t 0"
+"2"       = mod 4 | shift : window : !"wmctrl -r :ACTIVE: -t 1"
+"3"       = mod 4 | shift : window : !"wmctrl -r :ACTIVE: -t 2"
+"4"       = mod 4 | shift : window : !"wmctrl -r :ACTIVE: -t 3"
+"5"       = mod 4 | shift : window : !"wmctrl -r :ACTIVE: -t 4"
+"6"       = mod 4 | shift : window : !"wmctrl -r :ACTIVE: -t 5"
+"7"       = mod 4 | shift : window : !"wmctrl -r :ACTIVE: -t 6"
+"8"       = mod 4 | shift : window : !"wmctrl -r :ACTIVE: -t 7"
+"9"       = mod 4 | shift : window : !"wmctrl -r :ACTIVE: -t 8"
+"0"       = mod 4 | shift : window : !"wmctrl -r :ACTIVE: -t 9"
