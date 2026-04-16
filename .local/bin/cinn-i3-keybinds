@@ -1,5 +1,5 @@
 #!/bin/bash
-# Set some Cinnamon keybinds to match i3 keybinds
+# Set some Cinnamon keybinds to match i3 keybinds for moving between workspaces
 # The .ctwmrc file also makes use of these keybinds
 
 # Switch to workspace -- Super+Number
