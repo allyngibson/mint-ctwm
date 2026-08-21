@@ -23,5 +23,8 @@ numlockx on
 # Set XDG_CURRENT_DESKTOP
 export XDG_CURRENT_DESKTOP=ctwm
 
+# Set cursor size for some programs, like Vivaldi
+export XCURSOR_SIZE=48 XCURSOR_THEME='DMZ-White'
+
 # Launch CTWM
 /usr/bin/ctwm
