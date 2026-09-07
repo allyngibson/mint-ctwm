@@ -1,4 +1,5 @@
 # CTWM – Strange New Worlds
+## A Old School Configuration with 21st-Century Aesthetics
 
 *What would Linux Mint have looked like in 1994?*
 
